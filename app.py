@@ -22,7 +22,7 @@ def input_int(mensagen):
         num = input(mensagen)
         try:
             return int(num)
-        except ValueError:
+        except TypeError:
             print("numero invalido")
 
 def listar_contatos():
@@ -72,10 +72,13 @@ def alterar_contato():
     cursor.execute(sql, (novo_valor, id_contato))
     conexao.commit()
 
-
-
 def remover_contato():
-    print("4")
+    conexao = conectar()
+    cursor = conexao.cursor()
+    id_contato = input_int("insira o id do contato que você deseja remover: ")
+    sql = "DELETE FROM contatos WHERE (id = ?);"
+    cursor.execute(sql, (id_contato,))
+    conexao.commit()
 
 def menu():
     while True:
