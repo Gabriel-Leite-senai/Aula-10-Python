@@ -57,22 +57,20 @@ def alterar_contato():
         print("3 - email")
         opt = input("Qual o campo que você deseja alterar: ")
         if opt == "1":
-            campo = "nome"
+            sql = " UPDATE contatos SET nome = ? WHERE id LIKE ?"
             break
         elif opt == "2":
-            campo = "telefone"
+            sql = " UPDATE contatos SET telefone = ? WHERE id LIKE ?"
             break
         elif opt == "3":
-            campo = "email"
+            sql = " UPDATE contatos SET email = ? WHERE id LIKE ?"
             break
         else:
             print("opção invalida")
     novo_valor = input("insira o novo valor: ")
 
-    sql = """
-    UPDATE contatos SET telefone = ? WHERE id LIKE ?
-    """
-    cursor.execute(sql, (campo, novo_valor, id_contato))
+    cursor.execute(sql, (novo_valor, id_contato))
+    conexao.commit()
 
 
 
